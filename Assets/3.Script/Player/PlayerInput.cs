@@ -11,8 +11,6 @@ public class PlayerInput : MonoBehaviour
     float rotationVelocity;
     float rotationSmoothTime = 0.12f;
 
-    float moveSpeed = 2f;
-
     Animator playerAni;
 
     private void Start()
