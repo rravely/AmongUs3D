@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviourPun
 {
     [Header("Character Input Values")]
     public Vector2 move;
@@ -12,15 +13,22 @@ public class PlayerInput : MonoBehaviour
     float rotationSmoothTime = 0.12f;
 
     Animator playerAni;
+    PhotonView pV;
 
     private void Start()
     {
         playerAni = GetComponent<Animator>();
+        TryGetComponent<PhotonView>(out pV);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        Move();
+        if (pV.IsMine)
+        {
+            Move();
+        }
     }
 
     void OnMove(InputValue value)

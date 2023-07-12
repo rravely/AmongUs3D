@@ -21,6 +21,7 @@ public class LoginControl : MonoBehaviour
         {
             gameObject.SetActive(false);
             FindObjectOfType<PunManager>().Connect();
+            PlayerPrefs.SetString("Name", id.text);
         }
         else
         {
