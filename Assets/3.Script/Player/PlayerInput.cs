@@ -52,6 +52,6 @@ public class PlayerInput : MonoBehaviour
         }
 
         //Move
-        transform.position += new Vector3(move.x * 0.03f, 0f, move.y * 0.03f);
+        transform.position += new Vector3(move.x * 0.02f, 0f, move.y * 0.02f);
     }
 }
