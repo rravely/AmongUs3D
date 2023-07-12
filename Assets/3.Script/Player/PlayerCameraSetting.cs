@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 
 public class PlayerCameraSetting : MonoBehaviourPun
@@ -13,6 +14,9 @@ public class PlayerCameraSetting : MonoBehaviourPun
         if (!photonView.IsMine) return;
 
         playerCameraRoot = transform.GetChild(1);
-        FindObjectOfType<CameraSetting>().SetTransform(transform);
+        if (SceneManager.GetActiveScene().name.Equals("1.GameScene"))
+        {
+            FindObjectOfType<CameraSetting>().SetTransform(transform);
+        }
     }
 }
