@@ -16,6 +16,8 @@ public class GameProgress : MonoBehaviour
     [SerializeField] Button useBtn;
     [SerializeField] Button killBtn;
 
+    [SerializeField] Image killedImgae;
+
     //countDown
     float timeRemaining;
 
