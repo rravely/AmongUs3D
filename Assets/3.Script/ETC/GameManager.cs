@@ -8,8 +8,12 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    int maxPlayerNum = 1;
+    int maxPlayerNum = 2;
     public GameObject[] players;
+
+    //Player role info
+    public int[] playerRole;
+    public bool[] playerDead;
 
     //Spawn point
     [SerializeField] Transform spawnPoint;
@@ -18,9 +22,12 @@ public class GameManager : MonoBehaviour
     bool isChange = false;
 
     //countDown
-    float waitingTime = 5f;
+    float waitingTime = 1f;
     float timeRemaining;
     [SerializeField] Text countDown;
+
+    //Kill Player
+    public int killPlayerNum = 8;
 
     public static GameManager instance = null;
 
@@ -38,6 +45,7 @@ public class GameManager : MonoBehaviour
         }
 
         players = new GameObject[maxPlayerNum];
+        playerDead = new bool[maxPlayerNum];
     }
 
     private void Update()
@@ -51,11 +59,10 @@ public class GameManager : MonoBehaviour
 
     public void ChangeGameScene()
     {
-        StartCoroutine(CountDown_co());
-        //SceneManager.LoadScene("1.GameScene");
+        StartCoroutine(StartCountDown_co());
     }
 
-    IEnumerator CountDown_co()
+    IEnumerator StartCountDown_co()
     {
         countDown.gameObject.SetActive(true);
 
@@ -67,7 +74,59 @@ public class GameManager : MonoBehaviour
             countDown.text = Mathf.CeilToInt(timeRemaining).ToString();
             yield return null;
         }
-
+        SetPlayerRole();
         SceneManager.LoadScene("1.GameScene");
     }
+
+    public void SetPlayerRole()
+    {
+        int a = maxPlayerNum, b = maxPlayerNum;
+        a = Random.Range(0, maxPlayerNum);
+
+        while (a.Equals(b) || b.Equals(maxPlayerNum))
+        {
+            b = Random.Range(0, maxPlayerNum);
+        }
+        
+
+        playerRole = new int[maxPlayerNum];
+
+        for (int i = 0; i < playerRole.Length; i++)
+        {
+            if (i.Equals(a) || i.Equals(b))
+            {
+                playerRole[i] = 1; //imposter
+            }
+            else
+            {
+                playerRole[i] = 0;
+            }
+
+            playerRole[1] = 0;
+            playerRole[0] = 1;
+
+            players[i].GetComponent<PlayerControl>().playerRole = playerRole[i];
+        }
+        
+    }
+
+    public void KillPlayer()
+    {
+        if (killPlayerNum < 8)
+        {
+            playerDead[killPlayerNum] = true;
+            ChangePlayerDeadState();
+        }
+    }
+
+    public void ChangePlayerDeadState()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerControl>().ChangeIsDead();
+        }
+
+        //Display player killed
+    }
+
 }

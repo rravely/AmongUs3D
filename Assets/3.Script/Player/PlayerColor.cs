@@ -21,5 +21,10 @@ public class PlayerColor : MonoBehaviour
         transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().material = materials[playerNum];
         transform.GetChild(0).GetChild(2).GetComponent<MeshRenderer>().material = materials[playerNum];
         transform.GetChild(0).GetChild(3).GetComponent<MeshRenderer>().material = materials[playerNum];
+
+        transform.GetChild(1).GetChild(0).GetComponent<MeshRenderer>().material = materials[playerNum];
+        transform.GetChild(1).GetChild(1).GetComponent<MeshRenderer>().material = materials[playerNum];
+        transform.GetChild(1).GetChild(2).GetComponent<MeshRenderer>().material = materials[playerNum];
+        transform.GetChild(1).GetChild(3).GetComponent<MeshRenderer>().material = materials[playerNum];
     }
 }

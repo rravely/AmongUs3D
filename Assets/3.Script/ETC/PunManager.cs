@@ -23,6 +23,11 @@ public class PunManager : MonoBehaviourPunCallbacks
     [SerializeField] Material[] materials;
 
 
+    private void Awake()
+    {
+        Connect();
+    }
+
     public void Connect()
     {
         PhotonNetwork.GameVersion = gameVersion; //Version
@@ -71,7 +76,7 @@ public class PunManager : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity);
 
         int num = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        GameManager.instance.players[num] = player;
+        //GameManager.instance.players[num] = player;
         PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable() { { "PlayerNum", num }, { "PlayerName", PlayerPrefs.GetString("Name")}  };
     }
 }

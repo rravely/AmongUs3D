@@ -9,6 +9,7 @@ public class PlayerSpawnPoint : MonoBehaviour
         for (int i = 0; i < GameManager.instance.players.Length; i++)
         {
             GameManager.instance.players[i].transform.position = transform.GetChild(i).position;
+            GameManager.instance.players[i].transform.rotation = transform.GetChild(i).rotation;
         }
     }
 }
