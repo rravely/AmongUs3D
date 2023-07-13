@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     int maxPlayerNum = 1;
     public GameObject[] players;
 
+    //Spawn point
+    [SerializeField] Transform spawnPoint;
+
     //countDown
     float time = 5f;
     float timeRemaining;
@@ -44,6 +47,17 @@ public class GameManager : MonoBehaviour
     {
         //StartCoroutine(CountDown_co());
         SceneManager.LoadScene("1.GameScene");
+
+        spawnPoint = FindObjectOfType<PlayerSpawnPoint>().transform ;
+
+        //Players position
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].transform.position = spawnPoint.GetChild(i).position;
+        }
+
+        //Player camera
+
     }
 
     IEnumerator CountDown_co()
@@ -56,5 +70,14 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene("1.GameScene");
+        /*
+        spawnPoint = FindObjectOfType<PlayerSpawnPoint>().transform ;
+
+        //Players position
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].transform.position = spawnPoint.GetChild(i).position;
+        }
+        */
     }
 }

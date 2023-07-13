@@ -7,10 +7,9 @@ public class CameraSetting : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera virtualCam;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //virtualCam = GetComponent<CinemachineVirtualCamera>();
+        virtualCam = GetComponent<CinemachineVirtualCamera>();
     }
 
     public void SetTransform(Transform t)
