@@ -180,11 +180,13 @@ GameObject:
   - component: {fileID: 889559715550293140}
   - component: {fileID: 889559715550293138}
   - component: {fileID: 889559715550293139}
+  - component: {fileID: 983855924903086311}
   - component: {fileID: 889559715550293143}
   - component: {fileID: 889559715550293142}
   - component: {fileID: 889559715550293141}
   - component: {fileID: 889559715550293144}
   - component: {fileID: -53518490876450892}
+  - component: {fileID: 3377399744601227471}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -303,6 +305,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
+--- !u!114 &983855924903086311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889559715550293134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2e1e86403873349a454cea3b7476bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 0
+  playerName: 
 --- !u!114 &889559715550293143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,10 +375,10 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: Walk
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
 --- !u!114 &889559715550293144
 MonoBehaviour:
@@ -398,7 +414,24 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 96ab141d4242b2d4c853a94c68281181, type: 2}
   - {fileID: 2100000, guid: 1926abe55482d2a4bbcd102935c34e8f, type: 2}
   - {fileID: 2100000, guid: f609d9ca8083f8442b70c202c85a5bea, type: 2}
-  playerNum: 0
+--- !u!114 &3377399744601227471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889559715550293134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541a76f9c03874323b5154b14ac00427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spline: {fileID: 0}
+  Speed: 0
+  lookForward: 0
+  reverse: 0
+  currentDistance: 0
+  currentClampedDistance: 0
 --- !u!1 &889559716088490851
 GameObject:
   m_ObjectHideFlags: 0

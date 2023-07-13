@@ -71,12 +71,7 @@ public class PunManager : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity);
 
         int num = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        player.GetComponent<PlayerColor>().playerNum = num;
-        //PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable() { { "PlayerNum", num }, { "PlayerName", PlayerPrefs.GetString("Name")}  };
-
-        player.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().material = materials[num];
-        player.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().material = materials[num];
-        player.transform.GetChild(0).GetChild(2).GetComponent<MeshRenderer>().material = materials[num];
-        player.transform.GetChild(0).GetChild(3).GetComponent<MeshRenderer>().material = materials[num];
+        GameManager.instance.players[num] = player;
+        PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable() { { "PlayerNum", num }, { "PlayerName", PlayerPrefs.GetString("Name")}  };
     }
 }

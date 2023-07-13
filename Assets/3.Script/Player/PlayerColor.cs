@@ -8,13 +8,12 @@ public class PlayerColor : MonoBehaviour
     [Header("Player Body Materials")]
     [SerializeField] Material[] materials;
 
-    public int playerNum;
-
     // Start is called before the first frame update
     void Start()
     {
-        //ChangeBodyColor(playerNum);
+        ChangeBodyColor(GetComponent<PlayerControl>().playerNum);
     }
+
 
     void ChangeBodyColor(int playerNum)
     {
