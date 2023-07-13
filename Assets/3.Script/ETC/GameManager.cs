@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
@@ -13,9 +14,13 @@ public class GameManager : MonoBehaviour
     //Spawn point
     [SerializeField] Transform spawnPoint;
 
+    //Change scene
+    bool isChange = false;
+
     //countDown
-    float time = 5f;
+    float waitingTime = 5f;
     float timeRemaining;
+    [SerializeField] Text countDown;
 
     public static GameManager instance = null;
 
@@ -37,47 +42,32 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.PlayerList.Length.Equals(maxPlayerNum) && SceneManager.GetActiveScene().name.Equals("0.WaitingRoom"))
+        if (PhotonNetwork.PlayerList.Length.Equals(maxPlayerNum) && SceneManager.GetActiveScene().name.Equals("0.WaitingRoom") && !isChange)
         {
+            isChange = true;
             ChangeGameScene();
         }
     }
 
     public void ChangeGameScene()
     {
-        //StartCoroutine(CountDown_co());
-        SceneManager.LoadScene("1.GameScene");
-
-        spawnPoint = FindObjectOfType<PlayerSpawnPoint>().transform ;
-
-        //Players position
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].transform.position = spawnPoint.GetChild(i).position;
-        }
-
-        //Player camera
-
+        StartCoroutine(CountDown_co());
+        //SceneManager.LoadScene("1.GameScene");
     }
 
     IEnumerator CountDown_co()
     {
-        timeRemaining = time;
-        while (timeRemaining < time)
+        countDown.gameObject.SetActive(true);
+
+        float initTime = Time.time;
+        timeRemaining = waitingTime;
+        while (timeRemaining > 0)
         {
-            timeRemaining -= Time.deltaTime;
+            timeRemaining = waitingTime - (Time.time - initTime);
+            countDown.text = Mathf.CeilToInt(timeRemaining).ToString();
             yield return null;
         }
 
         SceneManager.LoadScene("1.GameScene");
-        /*
-        spawnPoint = FindObjectOfType<PlayerSpawnPoint>().transform ;
-
-        //Players position
-        for (int i = 0; i < players.Length; i++)
-        {
-            players[i].transform.position = spawnPoint.GetChild(i).position;
-        }
-        */
     }
 }

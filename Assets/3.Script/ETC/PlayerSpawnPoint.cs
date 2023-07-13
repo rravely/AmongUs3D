@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class PlayerSpawnPoint : MonoBehaviour
 {
-    public static PlayerSpawnPoint instance = null;
-
-    private void Awake()
+    private void Start()
     {
-        if (instance == null)
+        for (int i = 0; i < GameManager.instance.players.Length; i++)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
+            GameManager.instance.players[i].transform.position = transform.GetChild(i).position;
         }
     }
 }
