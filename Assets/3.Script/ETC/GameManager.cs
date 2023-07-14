@@ -8,7 +8,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    int maxPlayerNum = 2;
+    int maxPlayerNum = 1;
     public GameObject[] players;
 
     //Player role info
@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerRole()
     {
+        /*
         int a = maxPlayerNum, b = maxPlayerNum;
         a = Random.Range(0, maxPlayerNum);
 
@@ -87,7 +88,8 @@ public class GameManager : MonoBehaviour
         {
             b = Random.Range(0, maxPlayerNum);
         }
-        
+        */
+        int a = 0, b = 1;
 
         playerRole = new int[maxPlayerNum];
 
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour
                 playerRole[i] = 0;
             }
 
-            playerRole[1] = 0;
+            //playerRole[1] = 0;
             playerRole[0] = 1;
 
             players[i].GetComponent<PlayerControl>().playerRole = playerRole[i];
