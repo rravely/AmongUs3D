@@ -42,6 +42,7 @@ public class EnterIdCode : MonoBehaviour
         {
             gameObject.SetActive(false);
             isSuccess = true;
+            GameManager.instance.taskSuccess[0] = true;
         }
         else
         {

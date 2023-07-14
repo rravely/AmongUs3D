@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     //Kill Player
     public int killPlayerNum = 8;
 
+    //Check task success
+    public bool[] taskSuccess = new bool[3];
+
     public static GameManager instance = null;
 
     private void Awake()
