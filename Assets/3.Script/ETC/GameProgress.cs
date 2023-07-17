@@ -23,6 +23,7 @@ public class GameProgress : MonoBehaviour
 
     //task
     public GameObject task;
+    public Vent vent;
 
     public static GameProgress instance = null;
 
@@ -104,7 +105,15 @@ public class GameProgress : MonoBehaviour
 
     public void Use()
     {
-        task.SetActive(true);
+        if (task != null)
+        {
+            task.SetActive(true);
+        }
+        
+        if (vent != null)
+        {
+            vent.MoveByVent();
+        }
     }
 
     public void KillPlayer()

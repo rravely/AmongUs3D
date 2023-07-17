@@ -24,7 +24,7 @@ public class UseTaskObject : MonoBehaviour
         if (other.CompareTag("Player") && other.GetComponent<PlayerControl>().PV.IsMine)
         {
             canUse = false;
-            GameProgress.instance.task = this.task;
+            GameProgress.instance.task = null;
             GameProgress.instance.InteractiveButtonFalse(1);
         }
     }

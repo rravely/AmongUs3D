@@ -18,4 +18,15 @@ public class PlayerLocation : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.GetComponent<PlayerControl>().PV.IsMine)
+            {
+                location.text = "";
+            }
+        }
+    }
 }
