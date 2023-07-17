@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     //Check task success
     public bool[] taskSuccess = new bool[3];
 
+
     public static GameManager instance = null;
 
     private void Awake()

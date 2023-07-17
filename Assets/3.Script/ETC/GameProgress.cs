@@ -21,6 +21,25 @@ public class GameProgress : MonoBehaviour
     //countDown
     float timeRemaining;
 
+    //task
+    public GameObject task;
+
+    public static GameProgress instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
 
     void Start()
     {
@@ -83,6 +102,11 @@ public class GameProgress : MonoBehaviour
         }
     }
 
+    public void Use()
+    {
+        task.SetActive(true);
+    }
+
     public void KillPlayer()
     {
         GameManager.instance.KillPlayer();
@@ -93,5 +117,36 @@ public class GameProgress : MonoBehaviour
         killBtn.interactable = isActive;
     }
 
+    public void InteractiveButton(int n)
+    {
+        switch (n)
+        {
+            case 0:
+                reportBtn.interactable = true;
+                break;
+            case 1:
+                useBtn.interactable = true;
+                break;
+            case 2:
+                killBtn.interactable = true;
+                break;
+        }
+    }
+
+    public void InteractiveButtonFalse(int n)
+    {
+        switch (n)
+        {
+            case 0:
+                reportBtn.interactable = false;
+                break;
+            case 1:
+                useBtn.interactable = false;
+                break;
+            case 2:
+                killBtn.interactable = false;
+                break;
+        }
+    }
 
 }
