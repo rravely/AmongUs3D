@@ -65,6 +65,7 @@ public class FuelEnginesFill : MonoBehaviour
 
         isSuccess = true;
         GameManager.instance.taskSuccess[2] = true;
+        GameProgress.instance.MyPlayerTaskSuccess(2);
 
         yield return new WaitForSeconds(1f);
         greenLight.color = greenDark;

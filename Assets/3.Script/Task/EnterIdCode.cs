@@ -44,6 +44,7 @@ public class EnterIdCode : MonoBehaviour
             //gameObject.SetActive(false);
             isSuccess = true;
             GameManager.instance.taskSuccess[0] = true;
+            GameProgress.instance.MyPlayerTaskSuccess(0);
 
             completed.gameObject.SetActive(true);
             completed.Completed();

@@ -37,6 +37,12 @@ public class EngineAlignSlider : MonoBehaviour, IDragHandler, IBeginDragHandler
         engine.eulerAngles = new Vector3(0, 0, minRotz);
     }
 
+    void onEnable()
+    {
+        pivotTransform.eulerAngles = new Vector3(0, 0, angle);
+        engine.eulerAngles = new Vector3(0, 0, minRotz);
+    }
+
     void Update()
     {
         if (isStart)
@@ -60,6 +66,7 @@ public class EngineAlignSlider : MonoBehaviour, IDragHandler, IBeginDragHandler
                 completed.gameObject.SetActive(true);
                 completed.Completed();
                 GameManager.instance.taskSuccess[3] = true;
+                GameProgress.instance.MyPlayerTaskSuccess(3);
             }
         }
     }

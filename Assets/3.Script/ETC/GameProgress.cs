@@ -15,6 +15,7 @@ public class GameProgress : MonoBehaviour
     [SerializeField] Button reportBtn;
     [SerializeField] Button useBtn;
     [SerializeField] Button killBtn;
+    [SerializeField] Slider taskProgressBar;
 
     [SerializeField] Image killedImgae;
 
@@ -158,4 +159,23 @@ public class GameProgress : MonoBehaviour
         }
     }
 
+    public void MyPlayerTaskSuccess(int n)
+    {
+        myPlayerControl.ChangeTaskSuccess(n);
+        TaskProgressBar();
+    }
+
+    public void TaskProgressBar()
+    {
+        int taskProgress = 0;
+        for (int i = 0; i < GameManager.instance.taskSuccess.Length; i++)
+        {
+            if (GameManager.instance.taskSuccess[i].Equals(true))
+            {
+                taskProgress++;
+            }
+        }
+
+        taskProgressBar.value = taskProgress / GameManager.instance.taskSuccess.Length;
+    }
 }

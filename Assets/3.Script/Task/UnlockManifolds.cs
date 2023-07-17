@@ -38,6 +38,7 @@ public class UnlockManifolds : MonoBehaviour
                 completed.Completed();
 
                 GameManager.instance.taskSuccess[4] = true;
+                GameProgress.instance.MyPlayerTaskSuccess(4);
             }
         }
         else

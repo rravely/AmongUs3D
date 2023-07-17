@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour
         if (PV.IsMine)
         {
             PV.RPC("SetPlayerNum", RpcTarget.All, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNum"]);
-            //PV.RPC("SetPlayerName", RpcTarget.All, PhotonNetwork.LocalPlayer.CustomProperties["PlayerName"].ToString());
+            PV.RPC("SetPlayerName", RpcTarget.All, PhotonNetwork.LocalPlayer.CustomProperties["PlayerName"].ToString());
         }
 
         GameManager.instance.players[playerNum] = gameObject;
@@ -105,4 +105,14 @@ public class PlayerControl : MonoBehaviour
         PV.RPC("PlayerDead", RpcTarget.All, GameManager.instance.playerDead[playerNum]);
     }
 
+    public void ChangeTaskSuccess(int n)
+    {
+        PV.RPC("TaskSuccess", RpcTarget.All, n);
+    }
+
+    [PunRPC]
+    void TaskSuccess(int n)
+    {
+        GameManager.instance.taskSuccess[n] = true;
+    }
 }

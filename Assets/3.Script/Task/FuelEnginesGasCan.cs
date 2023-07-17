@@ -45,6 +45,7 @@ public class FuelEnginesGasCan : MonoBehaviour
         greenLight.color = green;
         isSuccess = true;
         GameManager.instance.taskSuccess[1] = true;
+        GameProgress.instance.MyPlayerTaskSuccess(1);
 
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
