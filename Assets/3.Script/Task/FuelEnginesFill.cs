@@ -69,7 +69,7 @@ public class FuelEnginesFill : MonoBehaviour
         yield return new WaitForSeconds(1f);
         greenLight.color = greenDark;
 
-        gameObject.SetActive(false);
+        completed.gameObject.SetActive(true);
         completed.Completed();
     }
     

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public int killPlayerNum = 8;
 
     //Check task success
-    public bool[] taskSuccess = new bool[4];
+    public bool[] taskSuccess = new bool[5];
 
 
     public static GameManager instance = null;

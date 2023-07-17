@@ -57,6 +57,7 @@ public class EngineAlignSlider : MonoBehaviour, IDragHandler, IBeginDragHandler
 
             if (alignTime > 1f)
             {
+                completed.gameObject.SetActive(true);
                 completed.Completed();
                 GameManager.instance.taskSuccess[3] = true;
             }
