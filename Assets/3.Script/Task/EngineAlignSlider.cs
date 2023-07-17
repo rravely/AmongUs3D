@@ -13,11 +13,17 @@ public class EngineAlignSlider : MonoBehaviour, IDragHandler, IBeginDragHandler
     Vector2 pivot;
     Vector3 rot = new Vector3(0f, 0f, 0f);
 
+    [Header("Task panel")]
     [SerializeField] GameObject task;
 
+    [Header("Engine")]
     [SerializeField] Transform engine;
 
+    [Header("Engine Line")]
     [SerializeField] Image line;
+
+    [Header("UI")]
+    [SerializeField] TaskCompleted completed;
 
     bool isStart = false;
     float alignTime = 0f;
@@ -51,7 +57,8 @@ public class EngineAlignSlider : MonoBehaviour, IDragHandler, IBeginDragHandler
 
             if (alignTime > 1f)
             {
-                task.SetActive(false);
+                completed.Completed();
+                GameManager.instance.taskSuccess[3] = true;
             }
         }
     }

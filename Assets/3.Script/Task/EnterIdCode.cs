@@ -10,6 +10,7 @@ public class EnterIdCode : MonoBehaviour
     [SerializeField] Text inputCode;
     [SerializeField] Image card;
     [SerializeField] Text randomCode;
+    [SerializeField] TaskCompleted completed;
 
     //My playerControl
     GameProgress gameProgress;
@@ -40,9 +41,12 @@ public class EnterIdCode : MonoBehaviour
     {
         if (randomCode.text.Equals(inputCode.text))
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
             isSuccess = true;
             GameManager.instance.taskSuccess[0] = true;
+
+            completed.gameObject.SetActive(true);
+            completed.Completed();
         }
         else
         {

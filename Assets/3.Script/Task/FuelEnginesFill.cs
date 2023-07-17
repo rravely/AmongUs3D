@@ -16,6 +16,9 @@ public class FuelEnginesFill : MonoBehaviour
     [Header("Gas Can")]
     [SerializeField] FuelEnginesGasCan fuelEnginesGasCan;
 
+    [Header("UI")]
+    [SerializeField] TaskCompleted completed;
+
     public bool isSuccess;
 
     //Color
@@ -61,11 +64,13 @@ public class FuelEnginesFill : MonoBehaviour
         greenLight.color = green;
 
         isSuccess = true;
+        GameManager.instance.taskSuccess[2] = true;
 
         yield return new WaitForSeconds(1f);
         greenLight.color = greenDark;
 
         gameObject.SetActive(false);
+        completed.Completed();
     }
     
 }
