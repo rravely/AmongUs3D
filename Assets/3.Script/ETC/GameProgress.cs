@@ -92,4 +92,6 @@ public class GameProgress : MonoBehaviour
     {
         killBtn.interactable = isActive;
     }
+
+
 }
