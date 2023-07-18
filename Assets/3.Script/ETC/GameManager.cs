@@ -123,6 +123,9 @@ public class GameManager : MonoBehaviour
             playerDead[killPlayerNum] = true;
             killedCount++;
             ChangePlayerDeadState();
+
+            killPlayerNum = 8;
+            GameProgress.instance.myPlayerControl.canKill = false;
         }
     }
 

@@ -116,14 +116,6 @@ public class GameProgress : MonoBehaviour
             vent.MoveByVent();
         }
     }
-
-    public void KillPlayer()
-    {
-        GameManager.instance.KillPlayer();
-
-        GameManager.instance.killPlayerNum = 8;
-        myPlayerControl.canKill = false;
-    }
     
     public void ActiveKillButton(bool isActive)
     {
