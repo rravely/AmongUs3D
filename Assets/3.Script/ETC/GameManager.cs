@@ -123,14 +123,6 @@ public class GameManager : MonoBehaviour
             playerDead[killPlayerNum] = true;
             killedCount++;
             ChangePlayerDeadState();
-
-            if (killedCount.Equals(maxPlayerNum - 1))
-            {
-                //GameOver
-                Debug.Log("Game Over: Imposter Win!");
-                GameProgress.instance.GameOver(1);
-                
-            }
         }
     }
 
@@ -175,6 +167,8 @@ public class GameManager : MonoBehaviour
             playerDead[i] = false;
             players[i].GetComponent<PlayerControl>().ChangeIsDead();
         }
+
+        killedCount = 0;
 
         //Reset task
         for (int i = 0; i < taskSuccess.Length; i++)

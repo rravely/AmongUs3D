@@ -122,8 +122,9 @@ public class PlayerControl : MonoBehaviour
         this.isDead = isDead;
         transform.GetChild(0).gameObject.SetActive(!isDead);
         transform.GetChild(1).gameObject.SetActive(isDead);
-    }
 
+        GameManager.instance.playerDead[playerNum] = isDead;
+    }
 
     public void ChangeIsDead()
     {
