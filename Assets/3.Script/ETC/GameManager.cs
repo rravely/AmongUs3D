@@ -8,7 +8,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    int maxPlayerNum = 2;
+    public int maxPlayerNum = 2;
     public GameObject[] players;
 
     //Player role info
@@ -128,8 +128,8 @@ public class GameManager : MonoBehaviour
             {
                 //GameOver
                 Debug.Log("Game Over: Imposter Win!");
-                ReStartGame();
-                SceneManager.LoadScene("1.GameScene");
+                GameProgress.instance.GameOver(1);
+                
             }
         }
     }
@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
         PV.RPC("TaskSuccess", RpcTarget.All, n);
     }
 
-    void ReStartGame()
+    public void ReStartGame()
     {
         //Reset 
         for (int i = 0; i < playerDead.Length; i++)
@@ -174,9 +174,17 @@ public class GameManager : MonoBehaviour
             //Reset player dead state
             playerDead[i] = false;
             players[i].GetComponent<PlayerControl>().ChangeIsDead();
+        }
 
-            //Reset task
+        //Reset task
+        for (int i = 0; i < taskSuccess.Length; i++)
+        {
             taskSuccess[i] = false;
         }
+
+        GameProgress.instance.TaskProgressBar();
+
+        SceneManager.LoadScene("1.GameScene");
     }
+
 }

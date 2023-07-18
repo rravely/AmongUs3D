@@ -16,6 +16,8 @@ public class GameProgress : MonoBehaviour
     public Button useBtn;
     public Button killBtn;
     public Slider taskProgressBar;
+    public Image victory;
+    public Text victoryRole;
 
     //[SerializeField] Image killedImgae;
 
@@ -25,6 +27,7 @@ public class GameProgress : MonoBehaviour
     //task
     public GameObject task;
     public Vent vent;
+    public int taskProgress;
 
     public static GameProgress instance = null;
 
@@ -169,7 +172,7 @@ public class GameProgress : MonoBehaviour
 
     public void TaskProgressBar()
     {
-        int taskProgress = 0;
+        taskProgress = 0;
         for (int i = 0; i < GameManager.instance.taskSuccess.Length; i++)
         {
             if (GameManager.instance.taskSuccess[i].Equals(true))
@@ -179,5 +182,37 @@ public class GameProgress : MonoBehaviour
         }
 
         taskProgressBar.value = (float)taskProgress / (float)GameManager.instance.taskSuccess.Length;
+    }
+
+    public void GameOver(int n)
+    {
+        StartCoroutine(GameOver_co(n));
+    }
+
+    IEnumerator GameOver_co(int n)
+    {
+        //Display UI
+        victory.gameObject.SetActive(true);
+        
+        switch (n)
+        {
+            case 0:
+                victoryRole.text = "Crew";
+                break;
+            case 1:
+                victoryRole.text = "Imposter";
+                break;
+        }
+
+
+        float time = 0;
+        while (time < 5f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        victory.gameObject.SetActive(false);
+        GameManager.instance.ReStartGame();
     }
 }

@@ -11,6 +11,8 @@ public class GameSceneUI : MonoBehaviour
     [SerializeField] Button useBtn;
     [SerializeField] Button killBtn;
     [SerializeField] Slider taskProgressBar;
+    [SerializeField] Image victory;
+    [SerializeField] Text victoryRole;
 
     private void Start()
     {
@@ -19,5 +21,7 @@ public class GameSceneUI : MonoBehaviour
         GameProgress.instance.useBtn = this.useBtn;
         GameProgress.instance.killBtn = this.killBtn;
         GameProgress.instance.taskProgressBar = this.taskProgressBar;
+        GameProgress.instance.victory = this.victory;
+        GameProgress.instance.victoryRole = this.victoryRole;
     }
 }
