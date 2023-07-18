@@ -11,13 +11,13 @@ public class GameProgress : MonoBehaviour
     public PlayerControl myPlayerControl;
 
     [Header("UI")]
-    [SerializeField] Text roleUI;
-    [SerializeField] Button reportBtn;
-    [SerializeField] Button useBtn;
-    [SerializeField] Button killBtn;
-    [SerializeField] Slider taskProgressBar;
+    public Text roleUI;
+    public Button reportBtn;
+    public Button useBtn;
+    public Button killBtn;
+    public Slider taskProgressBar;
 
-    [SerializeField] Image killedImgae;
+    //[SerializeField] Image killedImgae;
 
     //countDown
     float timeRemaining;
@@ -52,13 +52,9 @@ public class GameProgress : MonoBehaviour
             {
                 myPlayer = GameManager.instance.players[i];
                 myPlayerControl = myPlayer.GetComponent<PlayerControl>();
-                roleNum = myPlayerControl.playerRole;
                 break;
             }
         }
-
-        //view player role
-        StartCoroutine(ViewPlayerRole_co());
     }
 
     IEnumerator ViewPlayerRole_co()
@@ -77,8 +73,10 @@ public class GameProgress : MonoBehaviour
         StartCoroutine(CountDown_co(40f));
     }
 
-    void SetRoleUI()
+    public void SetRoleUI()
     {
+        roleUI.gameObject.SetActive(true);
+
         switch (roleNum)
         {
             case 0:
@@ -90,7 +88,6 @@ public class GameProgress : MonoBehaviour
                 killBtn.gameObject.SetActive(true);
                 break;
         }
-        
     }
 
     IEnumerator CountDown_co(float waitingTime)
@@ -120,11 +117,17 @@ public class GameProgress : MonoBehaviour
     public void KillPlayer()
     {
         GameManager.instance.KillPlayer();
+
+        GameManager.instance.killPlayerNum = 8;
+        myPlayerControl.canKill = false;
     }
     
     public void ActiveKillButton(bool isActive)
     {
-        killBtn.interactable = isActive;
+        if (killBtn != null)
+        {
+            killBtn.interactable = isActive;
+        }
     }
 
     public void InteractiveButton(int n)
@@ -161,8 +164,7 @@ public class GameProgress : MonoBehaviour
 
     public void MyPlayerTaskSuccess(int n)
     {
-        myPlayerControl.ChangeTaskSuccess(n);
-        TaskProgressBar();
+        GameManager.instance.SendTaskSuccess(n);
     }
 
     public void TaskProgressBar()
@@ -176,6 +178,6 @@ public class GameProgress : MonoBehaviour
             }
         }
 
-        taskProgressBar.value = taskProgress / GameManager.instance.taskSuccess.Length;
+        taskProgressBar.value = (float)taskProgress / (float)GameManager.instance.taskSuccess.Length;
     }
 }

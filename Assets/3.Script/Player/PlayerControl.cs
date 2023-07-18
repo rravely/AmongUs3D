@@ -7,7 +7,7 @@ using Photon.Pun;
 public class PlayerControl : MonoBehaviour
 {
     //Player info
-    public int playerNum;
+    public int playerNum = 8;
     public string playerName;
 
     //player role
@@ -32,13 +32,18 @@ public class PlayerControl : MonoBehaviour
         PV = GetComponent<PhotonView>();
         playerAni = GetComponent<Animator>();
 
+        SetPlayer();
+
+        GameManager.instance.players[playerNum] = gameObject;
+    }
+
+    public void SetPlayer()
+    {
         if (PV.IsMine)
         {
             PV.RPC("SetPlayerNum", RpcTarget.All, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNum"]);
             PV.RPC("SetPlayerName", RpcTarget.All, PhotonNetwork.LocalPlayer.CustomProperties["PlayerName"].ToString());
         }
-
-        GameManager.instance.players[playerNum] = gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,7 +59,10 @@ public class PlayerControl : MonoBehaviour
                 {
                     canKill = true;
                     GameManager.instance.killPlayerNum = otherPlayerControl.playerNum;
-                    FindObjectOfType<GameProgress>().ActiveKillButton(true);
+                    if (FindObjectOfType<GameProgress>() != null)
+                    {
+                        FindObjectOfType<GameProgress>().ActiveKillButton(true);
+                    }
                 }
             }
         }
@@ -73,7 +81,10 @@ public class PlayerControl : MonoBehaviour
                 {
                     canKill = false;
                     GameManager.instance.killPlayerNum = 8;
-                    FindObjectOfType<GameProgress>().ActiveKillButton(false);
+                    if (FindObjectOfType<GameProgress>() != null)
+                    {
+                        FindObjectOfType<GameProgress>().ActiveKillButton(false);
+                    }
                 }
             }
         }
@@ -93,6 +104,19 @@ public class PlayerControl : MonoBehaviour
     }
 
     [PunRPC]
+    void PlayerRole(int roleNum)
+    {
+        playerRole = roleNum;
+        GameManager.instance.playerRole[playerNum] = roleNum;
+        //GameProgress.instance.roleNum = roleNum;
+    }
+
+    public void ChangeRole()
+    {
+        PV.RPC("PlayerRole", RpcTarget.All, GameManager.instance.playerRole[playerNum]);
+    }
+
+    [PunRPC]
     void PlayerDead(bool isDead)
     {
         this.isDead = isDead;
@@ -100,19 +124,10 @@ public class PlayerControl : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(isDead);
     }
 
+
     public void ChangeIsDead()
     {
         PV.RPC("PlayerDead", RpcTarget.All, GameManager.instance.playerDead[playerNum]);
     }
 
-    public void ChangeTaskSuccess(int n)
-    {
-        PV.RPC("TaskSuccess", RpcTarget.All, n);
-    }
-
-    [PunRPC]
-    void TaskSuccess(int n)
-    {
-        GameManager.instance.taskSuccess[n] = true;
-    }
 }

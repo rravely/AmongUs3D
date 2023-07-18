@@ -25,7 +25,7 @@ public class PunManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        Connect();
+        //Connect();
     }
 
     public void Connect()
@@ -76,7 +76,6 @@ public class PunManager : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity);
 
         int num = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-        //GameManager.instance.players[num] = player;
         PhotonNetwork.LocalPlayer.CustomProperties = new Hashtable() { { "PlayerNum", num }, { "PlayerName", PlayerPrefs.GetString("Name")}  };
     }
 }

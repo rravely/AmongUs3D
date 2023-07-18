@@ -20,8 +20,8 @@ public class LoginControl : MonoBehaviour
         if (SQLManager.instance.Login(id.text, pwd.text))
         {
             gameObject.SetActive(false);
-            FindObjectOfType<PunManager>().Connect();
             PlayerPrefs.SetString("Name", id.text);
+            FindObjectOfType<PunManager>().Connect();
         }
         else
         {

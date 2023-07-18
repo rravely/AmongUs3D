@@ -8,7 +8,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    int maxPlayerNum = 1;
+    int maxPlayerNum = 2;
     public GameObject[] players;
 
     //Player role info
@@ -28,10 +28,13 @@ public class GameManager : MonoBehaviour
 
     //Kill Player
     public int killPlayerNum = 8;
+    public int killedCount = 0;
 
     //Check task success
     public bool[] taskSuccess = new bool[5];
 
+    //Photon View
+    PhotonView PV;
 
     public static GameManager instance = null;
 
@@ -49,7 +52,10 @@ public class GameManager : MonoBehaviour
         }
 
         players = new GameObject[maxPlayerNum];
+        playerRole = new int[maxPlayerNum];
         playerDead = new bool[maxPlayerNum];
+
+        PV = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -78,42 +84,36 @@ public class GameManager : MonoBehaviour
             countDown.text = Mathf.CeilToInt(timeRemaining).ToString();
             yield return null;
         }
-        SetPlayerRole();
+
         SceneManager.LoadScene("1.GameScene");
+        //SetPlayerRole();
     }
 
     public void SetPlayerRole()
     {
-        /*
-        int a = maxPlayerNum, b = maxPlayerNum;
-        a = Random.Range(0, maxPlayerNum);
-
-        while (a.Equals(b) || b.Equals(maxPlayerNum))
+        if (PhotonNetwork.IsMasterClient)
         {
-            b = Random.Range(0, maxPlayerNum);
-        }
-        */
-        int a = 0, b = 1;
+            playerRole = new int[maxPlayerNum];
+            int n = Random.Range(0, maxPlayerNum);
+            Debug.Log($"Imposter: {n}");
 
-        playerRole = new int[maxPlayerNum];
-
-        for (int i = 0; i < playerRole.Length; i++)
-        {
-            if (i.Equals(a) || i.Equals(b))
+            for (int i = 0; i < playerRole.Length; i++)
             {
-                playerRole[i] = 1; //imposter
+                if (i.Equals(n))
+                {
+                    playerRole[i] = 1;
+                }
+                else
+                {
+                    playerRole[i] = 0;
+                }
+                players[i].GetComponent<PlayerControl>().playerRole = playerRole[i];
             }
-            else
-            {
-                playerRole[i] = 0;
-            }
-
-            //playerRole[1] = 0;
-            playerRole[0] = 1;
-
-            players[i].GetComponent<PlayerControl>().playerRole = playerRole[i];
+            ChangePlayerRole();
         }
-        
+
+        //Change UI
+        GameProgress.instance.TaskProgressBar() ;
     }
 
     public void KillPlayer()
@@ -121,7 +121,16 @@ public class GameManager : MonoBehaviour
         if (killPlayerNum < 8)
         {
             playerDead[killPlayerNum] = true;
+            killedCount++;
             ChangePlayerDeadState();
+
+            if (killedCount.Equals(maxPlayerNum - 1))
+            {
+                //GameOver
+                Debug.Log("Game Over: Imposter Win!");
+                ReStartGame();
+                SceneManager.LoadScene("1.GameScene");
+            }
         }
     }
 
@@ -135,4 +144,39 @@ public class GameManager : MonoBehaviour
         //Display player killed
     }
 
+    public void ChangePlayerRole()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerControl>().ChangeRole();
+        }
+    }
+
+
+    //Task progress
+    [PunRPC]
+    public void TaskSuccess(int n)
+    {
+        taskSuccess[n] = true;
+        GameProgress.instance.TaskProgressBar();
+    }
+
+    public void SendTaskSuccess(int n)
+    {
+        PV.RPC("TaskSuccess", RpcTarget.All, n);
+    }
+
+    void ReStartGame()
+    {
+        //Reset 
+        for (int i = 0; i < playerDead.Length; i++)
+        {
+            //Reset player dead state
+            playerDead[i] = false;
+            players[i].GetComponent<PlayerControl>().ChangeIsDead();
+
+            //Reset task
+            taskSuccess[i] = false;
+        }
+    }
 }

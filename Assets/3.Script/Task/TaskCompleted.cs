@@ -24,7 +24,6 @@ public class TaskCompleted : MonoBehaviour
     IEnumerator TaskCompleted_co()
     {
         transform.position = originPos;
-        Debug.Log(transform.position);
         while (transform.position.y < 540)
         {
             transform.position += new Vector3(0f, 15f, 0f);

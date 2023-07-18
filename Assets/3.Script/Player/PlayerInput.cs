@@ -13,19 +13,21 @@ public class PlayerInput : MonoBehaviourPun
     float rotationSmoothTime = 0.12f;
 
     Animator playerAni;
-    PhotonView pV;
+    PhotonView PV;
+    PlayerControl playerControl;
 
     private void Start()
     {
         playerAni = GetComponent<Animator>();
-        TryGetComponent<PhotonView>(out pV);
+        playerControl = GetComponent<PlayerControl>();
+        TryGetComponent<PhotonView>(out PV);
 
         DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
     {
-        if (pV.IsMine)
+        if (PV.IsMine && !playerControl.isDead)
         {
             Move();
         }
