@@ -27,6 +27,14 @@ public class FuelEnginesFill : MonoBehaviour
     Color green = new Vector4(0, 1, 0, 1);
     Color greenDark = new Vector4(0, 0.5f, 0, 1);
 
+    void Start()
+    {
+        fillbase.value = 0;
+
+        redLight.color = redDark;
+        greenLight.color = greenDark;
+    }
+
     // Start is called before the first frame update
     void OnEnable()
     {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 61dd0422a64fc27409b065dc4c6d4950
+guid: ae900283325d13048982e014c7312419
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,127 +129,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_0
+      name: blood_0
       rect:
         serializedVersion: 2
-        x: 116
-        y: 288
-        width: 111
-        height: 110
+        x: 137
+        y: 170
+        width: 252
+        height: 251
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 033b88060f66a864e9ec32cd4a5468c3
-      internalID: -27356126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_1
-      rect:
-        serializedVersion: 2
-        x: 230
-        y: 288
-        width: 111
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1b958a0d51ab1a48b4587e8cf06cb41
-      internalID: -437245430
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_2
-      rect:
-        serializedVersion: 2
-        x: 344
-        y: 288
-        width: 111
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af47a227bfceeb74288fcf97dac7c092
-      internalID: -468529306
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_3
-      rect:
-        serializedVersion: 2
-        x: 572
-        y: 288
-        width: 111
-        height: 110
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e07363626f84e24b8af9051984c4ba6
-      internalID: -673215148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_4
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 467
-        width: 63
-        height: 63
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 506bda318c6eead42a5ba8f62cc8ca39
-      internalID: 185958185
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Among Us - Buttons & Menu Elements_5
-      rect:
-        serializedVersion: 2
-        x: 244
-        y: 64
-        width: 184
-        height: 105
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f8284bb05d1155439fa2676ae0cd422
-      internalID: -424293898
+      spriteID: 9f5b8a7f1600b63448d68c22c2668b44
+      internalID: 1651809052
       vertices: []
       indices: 
       edges: []
@@ -265,12 +160,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Among Us - Buttons & Menu Elements_0: -27356126
-      Among Us - Buttons & Menu Elements_1: -437245430
-      Among Us - Buttons & Menu Elements_2: -468529306
-      Among Us - Buttons & Menu Elements_3: -673215148
-      Among Us - Buttons & Menu Elements_4: 185958185
-      Among Us - Buttons & Menu Elements_5: -424293898
+      blood_0: 1651809052
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

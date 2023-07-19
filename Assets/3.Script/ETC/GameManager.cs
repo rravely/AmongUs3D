@@ -8,7 +8,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    public int maxPlayerNum = 2;
+    [HideInInspector] public int maxPlayerNum = 3;
     public GameObject[] players;
 
     //Player role info
@@ -21,8 +21,11 @@ public class GameManager : MonoBehaviour
     //Change scene
     bool isChange = false;
 
+    //Game start
+    public bool isGameStart = false;
+
     //countDown
-    float waitingTime = 1f;
+    float waitingTime = 3f;
     float timeRemaining;
     [SerializeField] Text countDown;
 
@@ -93,7 +96,6 @@ public class GameManager : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            playerRole = new int[maxPlayerNum];
             int n = Random.Range(0, maxPlayerNum);
             Debug.Log($"Imposter: {n}");
 
@@ -160,6 +162,19 @@ public class GameManager : MonoBehaviour
     {
         PV.RPC("TaskSuccess", RpcTarget.All, n);
     }
+
+
+    //Start game signal
+    [PunRPC]
+    void GameStart(bool isStart)
+    {
+        isGameStart = isStart;
+    }
+
+    public void SendStartGame(bool isStart)
+    {
+        PV.RPC("GameStart", RpcTarget.All, isStart);
+    }    
 
     public void ReStartGame()
     {

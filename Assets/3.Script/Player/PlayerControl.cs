@@ -37,6 +37,11 @@ public class PlayerControl : MonoBehaviour
         GameManager.instance.players[playerNum] = gameObject;
     }
 
+    private void Update()
+    {
+        SetPlayer();
+    }
+
     public void SetPlayer()
     {
         if (PV.IsMine)
