@@ -254,6 +254,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Among Us - Buttons & Menu Elements_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1043
+        width: 443
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d1886d2b62b8554191b2507f574e295
+      internalID: -1043140331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -271,6 +292,7 @@ TextureImporter:
       Among Us - Buttons & Menu Elements_3: -673215148
       Among Us - Buttons & Menu Elements_4: 185958185
       Among Us - Buttons & Menu Elements_5: -424293898
+      Among Us - Buttons & Menu Elements_6: -1043140331
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

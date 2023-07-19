@@ -21,6 +21,9 @@ public class GameProgress : MonoBehaviour
     public Text victoryRole;
     public Image darkSight;
 
+    [SerializeField] Sprite ventSprite;
+    [SerializeField] Sprite useSprite;
+
     [Header("Sound")]
     [SerializeField] AudioClip enterMiniGame;
     [SerializeField] AudioClip crewWin;
@@ -99,11 +102,13 @@ public class GameProgress : MonoBehaviour
                 roleUI.text = "Crew";
                 killBtn.gameObject.SetActive(false);
                 darkSight.gameObject.SetActive(false);
+                useBtn.GetComponent<Image>().sprite = useSprite;
                 break;
             case 1:
                 roleUI.text = "Imposter";
                 killBtn.gameObject.SetActive(true);
                 darkSight.gameObject.SetActive(true);
+                useBtn.GetComponent<Image>().sprite = ventSprite;
                 break;
         }
     }
@@ -121,13 +126,13 @@ public class GameProgress : MonoBehaviour
 
     public void Use()
     {
-        if (task != null)
+        if (roleNum.Equals(0) && task != null)
         {
             audioSource.PlayOneShot(enterMiniGame);
             task.SetActive(true);
         }
         
-        if (vent != null)
+        if (roleNum.Equals(1) && vent != null)
         {
             myPlayerControl.VentSound();
             vent.MoveByVent();

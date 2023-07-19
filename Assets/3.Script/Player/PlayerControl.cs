@@ -77,7 +77,7 @@ public class PlayerControl : MonoBehaviour
                 playerInput.moveSpeed = 0.04f;
                 break;
             case 1:
-                playerInput.moveSpeed = 0.02f;
+                playerInput.moveSpeed = 0.03f;
                 break;
         }
     }    
