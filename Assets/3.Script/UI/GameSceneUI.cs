@@ -5,14 +5,23 @@ using UnityEngine.UI;
 
 public class GameSceneUI : MonoBehaviour
 {
-    [Header("UI")]
+    [Header("Role text")]
     [SerializeField] Text roleUI;
+
+    [Header("Buttons")]
     [SerializeField] Button reportBtn;
     [SerializeField] Button useBtn;
     [SerializeField] Button killBtn;
+
+    [Header("Task bar")]
     [SerializeField] Slider taskProgressBar;
+
+    [Header("Victory")]
     [SerializeField] Image victory;
     [SerializeField] Text victoryRole;
+
+    [Header("Imposter sight")]
+    [SerializeField] Image darkSight;
 
     private void Start()
     {
@@ -23,5 +32,6 @@ public class GameSceneUI : MonoBehaviour
         GameProgress.instance.taskProgressBar = this.taskProgressBar;
         GameProgress.instance.victory = this.victory;
         GameProgress.instance.victoryRole = this.victoryRole;
+        GameProgress.instance.darkSight = this.darkSight;
     }
 }

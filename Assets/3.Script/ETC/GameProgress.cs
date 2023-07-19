@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameProgress : MonoBehaviour
 {
     //Current player info
+    [Header("Local player")]
     public int roleNum;
     public GameObject myPlayer;
     public PlayerControl myPlayerControl;
@@ -18,6 +19,7 @@ public class GameProgress : MonoBehaviour
     public Slider taskProgressBar;
     public Image victory;
     public Text victoryRole;
+    public Image darkSight;
 
     //[SerializeField] Image killedImgae;
 
@@ -86,10 +88,12 @@ public class GameProgress : MonoBehaviour
             case 0:
                 roleUI.text = "Crew";
                 killBtn.gameObject.SetActive(false);
+                darkSight.gameObject.SetActive(false);
                 break;
             case 1:
                 roleUI.text = "Imposter";
                 killBtn.gameObject.SetActive(true);
+                darkSight.gameObject.SetActive(true);
                 break;
         }
     }
