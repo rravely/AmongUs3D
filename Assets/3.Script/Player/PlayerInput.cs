@@ -19,12 +19,14 @@ public class PlayerInput : MonoBehaviourPun
     PhotonView PV;
     PlayerControl playerControl;
     Collider bodyCollider;
+    Rigidbody rigidBody;
 
     private void Start()
     {
         playerAni = GetComponent<Animator>();
         playerControl = GetComponent<PlayerControl>();
         bodyCollider = GetComponent<Collider>();
+        rigidBody = GetComponent<Rigidbody>();
         TryGetComponent<PhotonView>(out PV);
 
         DontDestroyOnLoad(gameObject);
@@ -50,8 +52,7 @@ public class PlayerInput : MonoBehaviourPun
                         transform.position = playerControl.seatPos;
                         transform.eulerAngles = playerControl.seatRot;
 
-                        transform.GetChild(0).gameObject.SetActive(false);
-                        transform.GetChild(2).gameObject.SetActive(true);
+                        playerAni.SetBool("Seat", true);
                     }
                 }
                 else //stand up
@@ -59,8 +60,7 @@ public class PlayerInput : MonoBehaviourPun
                     playerControl.isSeat = false;
                     transform.position = playerControl.standPos;
 
-                    transform.GetChild(0).gameObject.SetActive(true);
-                    transform.GetChild(2).gameObject.SetActive(false);
+                    playerAni.SetBool("Seat", false);
                 }
             }
         }
@@ -94,5 +94,17 @@ public class PlayerInput : MonoBehaviourPun
 
         //Move
         transform.position += new Vector3(move.x * moveSpeed, 0f, move.y * moveSpeed);
+    }
+
+    public void Seat()
+    {
+        bodyCollider.enabled = false;
+        rigidBody.useGravity = false;
+    }
+
+    public void Stand()
+    {
+        bodyCollider.enabled = true;
+        rigidBody.useGravity = true;
     }
 }
