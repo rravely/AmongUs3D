@@ -8,7 +8,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     //Player
-    [HideInInspector] public int maxPlayerNum = 3;
+    public int maxPlayerNum = 2;
     public GameObject[] players;
 
     //Player role info
@@ -83,6 +83,11 @@ public class GameManager : MonoBehaviour
         timeRemaining = waitingTime;
         while (timeRemaining > 0)
         {
+            if (timeRemaining < 1f)
+            {
+                SetPlayerIdle();
+            }
+
             timeRemaining = waitingTime - (Time.time - initTime);
             countDown.text = Mathf.CeilToInt(timeRemaining).ToString();
             yield return null;
@@ -90,6 +95,14 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("1.GameScene");
         //SetPlayerRole();
+    }
+
+    void SetPlayerIdle()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerControl>().PlayerStand();
+        }
     }
 
     public void SetPlayerRole()

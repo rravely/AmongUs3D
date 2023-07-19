@@ -157,5 +157,11 @@ public class PlayerControl : MonoBehaviour
     {
         PV.RPC("PlayerDead", RpcTarget.All, GameManager.instance.playerDead[playerNum]);
     }
-
+       
+    public void PlayerStand()
+    {
+        playerAni.SetBool("Seat", false);
+        isSeat = false;
+        isInSeat = false;
+    }
 }

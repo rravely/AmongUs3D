@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98f13a753e2bb64e8aedd316e3b97dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerNum: 3
+  maxPlayerNum: 2
   players: []
   playerRole: 
   playerDead: 
