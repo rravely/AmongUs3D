@@ -19,6 +19,8 @@ public class LoginControl : MonoBehaviour
 
         if (SQLManager.instance.Login(id.text, pwd.text))
         {
+            SQLManager.instance.DisconnectSQL();
+
             gameObject.SetActive(false);
             PlayerPrefs.SetString("Name", id.text);
             FindObjectOfType<PunManager>().Connect();
@@ -26,6 +28,25 @@ public class LoginControl : MonoBehaviour
         else
         {
             log.text = "Check id and password.";
+        }
+    }
+
+    public void JoinCheck()
+    {
+        if (id.text.Equals(string.Empty) || pwd.text.Equals(string.Empty))
+        {
+            log.text = "Enter id and password.";
+        }
+        else
+        {
+            if(SQLManager.instance.Join(id.text, pwd.text))
+            {
+                log.text = "Join completely";
+            }
+            else
+            {
+                log.text = "Fail to join";
+            }
         }
     }
 }

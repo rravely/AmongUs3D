@@ -25,7 +25,7 @@ public class PunManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        Connect();
+        //Connect();
     }
 
     public void Connect()

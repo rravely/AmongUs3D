@@ -148,40 +148,40 @@ public class SQLManager : MonoBehaviour
         {
             if (!CheckConnection(connection)) return false;
 
-            string SQLCommand = string.Format(@"INSERT member (Name, Password) Values ('{0}', '{1}');", id, password);
+            //Check existed id
+            string SQLCommand = string.Format(@"SELECT Name, Password 
+            FROM member WHERE Name = '{0}' AND Password = '{1}';", id, password);
 
             MySqlCommand cmd = new MySqlCommand(SQLCommand, connection);
             reader = cmd.ExecuteReader();
 
             if (reader.HasRows) //Reader에서 읽은 데이터가 1개 이상 존재하는가?
             {
-                while (reader.Read()) //읽은 데이터를 나열하는 메서드
-                {
-                    string name = (reader.IsDBNull(0) ? string.Empty : reader["Name"].ToString());
-                    string pwd = (reader.IsDBNull(1) ? string.Empty : reader["Password"].ToString());
-
-                    if (!name.Equals(string.Empty) || !pwd.Equals(string.Empty))
-                    {
-                        info = new UserInfo(name, pwd);
-
-                        if (!reader.IsClosed) reader.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
                 if (!reader.IsClosed) reader.Close();
+                return false;
             }
-            return false;
+            else
+            {
+                reader.Close();
+
+                string SQLInsertCommand = string.Format(@"INSERT member (Name, Password) Values ('{0}', '{1}');", id, password);
+
+                MySqlCommand insertCmd = new MySqlCommand(SQLInsertCommand, connection);
+                insertCmd.ExecuteNonQuery();
+
+                return true;
+            }
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (!reader.IsClosed) reader.Close();
             return false;
         }
+    }
+
+    public void DisconnectSQL()
+    {
+        Debug.Log("Disconnect SQL DB");
+        connection.Close();
     }
 }
