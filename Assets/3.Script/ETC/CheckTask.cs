@@ -9,6 +9,9 @@ public class CheckTask : MonoBehaviour
     {
         if (GameProgress.instance.taskProgress.Equals(GameManager.instance.taskSuccess.Length))
         {
+            //Set inactive task ui
+            GameProgress.instance.InactiveTaskUI(false);
+
             //Restart Game
             GameProgress.instance.GameOver(0);
         }

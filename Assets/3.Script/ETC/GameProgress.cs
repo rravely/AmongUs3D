@@ -25,6 +25,7 @@ public class GameProgress : MonoBehaviour
     float timeRemaining;
 
     //task
+    public GameObject[] tasks;
     public GameObject task;
     public Vent vent;
     public int taskProgress;
@@ -206,5 +207,13 @@ public class GameProgress : MonoBehaviour
 
         victory.gameObject.SetActive(false);
         GameManager.instance.ReStartGame();
+    }
+
+    public void InactiveTaskUI(bool isActive)
+    {
+        for (int i = 0; i < tasks.Length; i++)
+        {
+            tasks[i].SetActive(isActive);
+        }
     }
 }

@@ -16,6 +16,11 @@ public class CheckDeath : MonoBehaviour
         if (CountPlayerKilled().Equals(GameManager.instance.maxPlayerNum - 1) && !isLock)
         {
             isLock = true;
+
+            //Set inactive task ui
+            GameProgress.instance.InactiveTaskUI(false);
+
+            //Restart Game
             GameProgress.instance.GameOver(1);
         }
     }

@@ -12,14 +12,19 @@ public class PlayerInput : MonoBehaviourPun
     float rotationVelocity;
     float rotationSmoothTime = 0.12f;
 
+    [Header("Move speed")]
+    public float moveSpeed = 0.03f;
+
     Animator playerAni;
     PhotonView PV;
     PlayerControl playerControl;
+    Collider bodyCollider;
 
     private void Start()
     {
         playerAni = GetComponent<Animator>();
         playerControl = GetComponent<PlayerControl>();
+        bodyCollider = GetComponent<Collider>();
         TryGetComponent<PhotonView>(out PV);
 
         DontDestroyOnLoad(gameObject);
@@ -27,9 +32,37 @@ public class PlayerInput : MonoBehaviourPun
 
     private void Update()
     {
-        if (PV.IsMine && !playerControl.isDead)
+        if (PV.IsMine && !playerControl.isDead && !playerControl.isSeat)
         {
             Move();
+        }
+        
+        if (PV.IsMine && !playerControl.isDead && playerControl.isInSeat)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (!playerControl.isSeat)
+                {
+                    //Seat
+                    if (playerControl.seatPos != null)
+                    {
+                        playerControl.isSeat = true;
+                        transform.position = playerControl.seatPos;
+                        transform.eulerAngles = playerControl.seatRot;
+
+                        transform.GetChild(0).gameObject.SetActive(false);
+                        transform.GetChild(2).gameObject.SetActive(true);
+                    }
+                }
+                else //stand up
+                {
+                    playerControl.isSeat = false;
+                    transform.position = playerControl.standPos;
+
+                    transform.GetChild(0).gameObject.SetActive(true);
+                    transform.GetChild(2).gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -60,6 +93,6 @@ public class PlayerInput : MonoBehaviourPun
         }
 
         //Move
-        transform.position += new Vector3(move.x * 0.02f, 0f, move.y * 0.02f);
+        transform.position += new Vector3(move.x * moveSpeed, 0f, move.y * moveSpeed);
     }
 }

@@ -21,9 +21,16 @@ public class PlayerControl : MonoBehaviour
 
     //player state
     public bool isDead = false;
+    public bool isInSeat = false;
+    public bool isSeat = false;
+    public Vector3 seatPos;
+    public Vector3 seatRot;
+    public Vector3 standPos;
 
     //PhotonView
     public PhotonView PV;
+
+    PlayerInput playerInput;
 
     Animator playerAni;
 
@@ -31,6 +38,7 @@ public class PlayerControl : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         playerAni = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
 
         SetPlayer();
 
@@ -40,6 +48,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         SetPlayer();
+        SetPlayerSpeed();
     }
 
     public void SetPlayer()
@@ -50,6 +59,19 @@ public class PlayerControl : MonoBehaviour
             PV.RPC("SetPlayerName", RpcTarget.All, PhotonNetwork.LocalPlayer.CustomProperties["PlayerName"].ToString());
         }
     }
+
+    void SetPlayerSpeed()
+    {
+        switch (playerRole)
+        {
+            case 0:
+                playerInput.moveSpeed = 0.04f;
+                break;
+            case 1:
+                playerInput.moveSpeed = 0.02f;
+                break;
+        }
+    }    
 
     private void OnTriggerEnter(Collider other)
     {
