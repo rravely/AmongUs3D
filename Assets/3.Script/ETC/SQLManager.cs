@@ -129,9 +129,8 @@ public class SQLManager : MonoBehaviour
                         break;
                     }
                 }
-
-                if (!reader.IsClosed) reader.Close();
             }
+            if (!reader.IsClosed) reader.Close();
             return false;
         }
         catch (Exception e)
@@ -150,7 +149,7 @@ public class SQLManager : MonoBehaviour
 
             //Check existed id
             string SQLCommand = string.Format(@"SELECT Name, Password 
-            FROM member WHERE Name = '{0}' AND Password = '{1}';", id, password);
+            FROM member WHERE Name = '{0}';", id);
 
             MySqlCommand cmd = new MySqlCommand(SQLCommand, connection);
             reader = cmd.ExecuteReader();
