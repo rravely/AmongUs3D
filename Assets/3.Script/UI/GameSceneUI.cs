@@ -23,6 +23,7 @@ public class GameSceneUI : MonoBehaviour
     [Header("Imposter sight")]
     [SerializeField] Image darkSight;
 
+
     private void Start()
     {
         GameProgress.instance.roleUI = this.roleUI;

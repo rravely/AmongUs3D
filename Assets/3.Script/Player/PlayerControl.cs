@@ -27,18 +27,27 @@ public class PlayerControl : MonoBehaviour
     public Vector3 seatRot;
     public Vector3 standPos;
 
+    public bool isKilledSoundPlay = false;
+
     //PhotonView
     public PhotonView PV;
 
+    //Component
     PlayerInput playerInput;
-
     Animator playerAni;
+    AudioSource audioSource;
+
+    [Header("Audio clip")]
+    [SerializeField] AudioClip audioWalk;
+    [SerializeField] AudioClip audioKill;
+    [SerializeField] AudioClip vent;
 
     void Start()
     {
         PV = GetComponent<PhotonView>();
         playerAni = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        audioSource = GetComponent<AudioSource>();
 
         SetPlayer();
 
@@ -151,6 +160,12 @@ public class PlayerControl : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(isDead);
 
         GameManager.instance.playerDead[playerNum] = isDead;
+
+        if (isDead && !isKilledSoundPlay)
+        {
+            isKilledSoundPlay = true;
+            KillSound();
+        }
     }
 
     public void ChangeIsDead()
@@ -163,5 +178,20 @@ public class PlayerControl : MonoBehaviour
         playerAni.SetBool("Seat", false);
         isSeat = false;
         isInSeat = false;
+    }
+
+    public void WalkSound()
+    {
+        audioSource.PlayOneShot(audioWalk);
+    }
+
+    public void KillSound()
+    {
+        audioSource.PlayOneShot(audioKill);
+    }
+
+    public void VentSound()
+    {
+        audioSource.PlayOneShot(vent);
     }
 }

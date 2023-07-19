@@ -21,6 +21,11 @@ public class GameProgress : MonoBehaviour
     public Text victoryRole;
     public Image darkSight;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip enterMiniGame;
+    [SerializeField] AudioClip crewWin;
+    [SerializeField] AudioClip imposterWin;
+
     //[SerializeField] Image killedImgae;
 
     //countDown
@@ -31,6 +36,9 @@ public class GameProgress : MonoBehaviour
     public GameObject task;
     public Vent vent;
     public int taskProgress;
+
+    //Component
+    AudioSource audioSource;
 
     public static GameProgress instance = null;
 
@@ -46,6 +54,8 @@ public class GameProgress : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -113,11 +123,13 @@ public class GameProgress : MonoBehaviour
     {
         if (task != null)
         {
+            audioSource.PlayOneShot(enterMiniGame);
             task.SetActive(true);
         }
         
         if (vent != null)
         {
+            myPlayerControl.VentSound();
             vent.MoveByVent();
         }
     }
@@ -195,9 +207,11 @@ public class GameProgress : MonoBehaviour
         {
             case 0:
                 victoryRole.text = "Crew";
+                audioSource.PlayOneShot(crewWin);
                 break;
             case 1:
                 victoryRole.text = "Imposter";
+                audioSource.PlayOneShot(imposterWin);
                 break;
         }
 

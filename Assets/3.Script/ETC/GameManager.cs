@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
         {
             //Reset player dead state
             playerDead[i] = false;
+            players[i].GetComponent<PlayerControl>().isKilledSoundPlay = false;
             players[i].GetComponent<PlayerControl>().ChangeIsDead();
         }
 
